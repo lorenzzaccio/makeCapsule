@@ -1,0 +1,61 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> organize palette</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="./css/myStyle.css" type="text/css" />
+        <script type="text/javascript">
+            function organizePalette(){
+                var nbrCartons = document.getElementById("nbrCarton");
+                var quantiteParCarton = document.getElementById("quantiteParCarton");
+                var refArticle = document.getElementById("refArticle");
+                var prefix = document.getElementById("prefix");
+                var nbrCoiffes = document.getElementById("nbrCoiffes");
+                var article = document.getElementById("article");
+                var article = document.getElementById("article");
+                var article = document.getElementById("article");
+                var article = document.getElementById("article");
+                
+                var selectArr = arrec[selectedRow];
+                var tmpArr = loadDefaultValue(selectArr[TYPE_HEADER]);
+                var j;
+                for(j=0;j<selectArr.length;j++)
+                    tmpArr[j]=selectArr[j];
+                
+                var alloc_index = allocateIndex(arrec,window.localStorage.getItem("stock:index"));
+                var id;
+                if(activeView=="CARTON")
+                    id = "gcai_"+alloc_index;
+                tmpArr[ID_HEADER]=id;
+                tmpArr[INDEX_HEADER]=stock.getLength();
+                tmpArr[TRANSX_HEADER] = x;
+                tmpArr[TRANSY_HEADER] = y;
+                recordLine(tmpArr);
+                arrec=null;
+                arrec=[]
+                stock.init();
+                insertRect(tmpArr);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="descrip_palette" class="desc" >
+            <INPUT TYPE=text id ="nbrCarton" style="width:50px;height:30px" VALUE="Nombre de cartons :" >
+            <INPUT TYPE=text id ="quantiteParCarton" style="width:50px;height:30px" VALUE="Quantité par carton :" >
+            <INPUT TYPE=text id ="refArticle" style="width:200px;height:40px" VALUE="desc palette" >
+
+            <select id="artCombo" size="1" STYLE="font-family : arial; font-size : 12pt" onClick="fillVal()"></select>
+            <INPUT TYPE=text id ="prefix" style="width:60px;height:40px" VALUE="C10" >
+            <INPUT TYPE=text id ="article" style="width:60px;height:40px" VALUE="02000127" >
+            <INPUT TYPE=text id ="nbrCoiffes" style="width:60px;height:40px" VALUE="2500" >
+            <INPUT TYPE=button id ="descBtn" style="width:auto;height:50px" VALUE="OK" onClick="setDesc()">
+            <INPUT TYPE=button id ="organizeBtn" style="width:auto;height:50px" VALUE="organize" onClick="organizePalette()">
+            <br>
+            <INPUT TYPE="BUTTON" VALUE="Fermer la fenêtre" ONCLICK="window.close()">           
+        </div>
+    </body>
+</html>
